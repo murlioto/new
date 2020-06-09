@@ -2,7 +2,7 @@
   <div id="app">
     <div class="container">
       <mySwiper :swipers="swipers" :duration="2000"/>
-      <myChannels />
+      <myChannels @changeId="handleChangeId"/>
     </div>
 
   </div>
@@ -37,6 +37,11 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    handleChangeId(newId) {
+      console.log(newId)
+    }
   }
 }
 </script>
@@ -45,5 +50,6 @@ export default {
   .container {
     max-width: 940px;
     margin: 0 auto;
+    min-width: 940px;
   }
 </style>

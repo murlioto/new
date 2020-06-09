@@ -1,6 +1,6 @@
 <template>
-  <div class="news-types">
-    <div class="item" v-for="(item, i) in showChannles" :key="item.channelId" :class="{active: isActive == i}">
+  <div class="news-types" v-if="channels.length > 0">
+    <div class="item" v-for="item in showChannles" :key="item.channelId" :class="{active: item.channelId == chooseId}" @click="switchTo(item.channelId)">
       <span class="name">{{item.name}}</span>
     </div>
     <a href="#" @click.prevent="isCollapse = !isCollapse">{{isCollapse ? '展开' : '收起'}}</a>
@@ -14,13 +14,13 @@ export default {
     return {
       channels: [], // 分类数据
       isCollapse: true, // 是否为折叠体
-      isActive: 0
+      chooseId: null, // 当前选中的项
     }
   },
   computed: {
     showChannles() {
       if (this.isCollapse) {
-          return this.channels.slice(0, 8)
+          return this.channels.slice(0, 7)
       }else {
         return this.channels
       }
@@ -30,9 +30,17 @@ export default {
     let resp = await getNewsChannels()
     // console.log(resp)
     this.channels = resp
+    this.switchTo(this.channels[0].channelId)
+    // console.log(this.channels[0])
+    // this.chooseId = this.channels[0].channelId
+    // console.log(this.channels[0].channelId);
+    // console.log(this.chooseId)
   },
   methods: {
-
+    switchTo(id) {
+      this.chooseId = id
+      this.$emit('changeId', this.chooseId)
+    }
   }
 }
 </script>
