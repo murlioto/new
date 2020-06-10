@@ -31,7 +31,8 @@ export async function getNews(channeId, page = 1, limit = 10) {
       channeId,
       page,
       maxResult: limit,
-      needAllList: false
+      needAllList: false,
+      needContent: 1
     }
   })
   return resp.data.showapi_res_body.pagebean.contentlist
