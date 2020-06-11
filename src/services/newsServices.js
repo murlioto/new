@@ -15,20 +15,13 @@ export async function getNewsChannels() {
 // getNewsChannels()
 
 // 获取新闻列表
-/**
- * [getNews description]
- * @param  {[type]} channeId   [频道id]
- * @param  {Number} [page=1]   [当前页数,默认值为1]
- * @param  {Number} [limit=10] [每页最大显示数，默认值为10]
- * @return {[type]}            [Array]
- */
-export async function getNews(channeId, page = 1, limit = 10) {
+export async function getNews(channelId= '5572a108b3cdc86cf39001cd', page = 1, limit = 10) {
   let resp = await axios.get('http://ali-news.showapi.com/newsList',{
     headers: {
       Authorization: `APPCODE ${AppCode}`
     },
     params: {
-      channeId,
+      channelId,
       page,
       maxResult: limit,
       needAllList: false,

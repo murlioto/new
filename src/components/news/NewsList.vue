@@ -45,6 +45,7 @@ export default {
     padding: 10px 0;
     box-sizing: border-box;
     display: flex;
+    align-items: center;
   }
   .news-item-normal:first-of-type {
     border-top: 1px solid #ccc;
@@ -57,19 +58,20 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 5px;
+    /*padding: 5px;*/
     box-sizing: border-box;
     overflow: hidden;
   }
   .news-item-normal .image img {
-    width: 100%;
-    height: 100%;
+    width: auto;
+    height: auto;
+    max-height: 120px;
+    max-width: 120px;
   }
   .news-item-normal .image + .words,
   .news-item-normal .words {
     flex: 1;
-    /* background-color: #424242; */
-    height: 120px;
+    height: auto;
   }
 
   .news-item-normal .image + .words {
@@ -83,7 +85,7 @@ export default {
   .news-item-normal .words .aside span {
     color: #666;
     margin-right: 10px;
-    line-height: 30px;
+    line-height: 40px;
     font-size: 14px;
   }
   .news-item-normal .words .content {

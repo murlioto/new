@@ -28,6 +28,7 @@ export default {
   },
   async created() {
     let resp = await getNewsChannels()
+    console.log(resp)
     // console.log(resp)
     this.channels = resp
     this.switchTo(this.channels[0].channelId)
@@ -38,6 +39,7 @@ export default {
   },
   methods: {
     switchTo(id) {
+      console.log(id)
       this.chooseId = id
       this.$emit('changeId', this.chooseId)
     }
@@ -73,6 +75,5 @@ export default {
   .news-types a {
     align-self: flex-end;
     margin-bottom: 20px;
-    color: #409eff;
   }
 </style>
