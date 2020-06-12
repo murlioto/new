@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
         <mySwiper :swipers="swipers" :duration="2000"/>
         <myChannels @changeId="handleChangeId"/>
         <myLoading v-show="isLoading"></myLoading>
@@ -50,7 +50,7 @@
                 this.isLoading = true
                 let resp = await getNews(newId,1,10)
                 console.log(resp)
-                this.news = resp
+                this.news = resp.contentlist
                 this.isLoading = false
             }
         }
@@ -59,9 +59,5 @@
 </script>
 
 <style scoped>
-    .container {
-        max-width: 940px;
-        margin: 0 auto;
-        min-width: 940px;
-    }
+
 </style>

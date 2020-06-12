@@ -8,14 +8,14 @@ export async function getNewsChannels() {
       Authorization: `APPCODE ${AppCode}`
     }
   })
-  return resp.data.showapi_res_body.channelList
+  return resp.data.showapi_res_body
 }
 
 // test
 // getNewsChannels()
 
 // 获取新闻列表
-export async function getNews(channelId= '5572a108b3cdc86cf39001cd', page = 1, limit = 10) {
+export async function getNews(channelId = '5572a108b3cdc86cf39001cd', page = 1, limit = 10) {
   let resp = await axios.get('http://ali-news.showapi.com/newsList',{
     headers: {
       Authorization: `APPCODE ${AppCode}`
@@ -28,5 +28,5 @@ export async function getNews(channelId= '5572a108b3cdc86cf39001cd', page = 1, l
       needContent: 1
     }
   })
-  return resp.data.showapi_res_body.pagebean.contentlist
+  return resp.data.showapi_res_body.pagebean
 }

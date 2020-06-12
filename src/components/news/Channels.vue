@@ -28,14 +28,8 @@ export default {
   },
   async created() {
     let resp = await getNewsChannels()
-    console.log(resp)
-    // console.log(resp)
-    this.channels = resp
+    this.channels = resp.channelList
     this.switchTo(this.channels[0].channelId)
-    // console.log(this.channels[0])
-    // this.chooseId = this.channels[0].channelId
-    // console.log(this.channels[0].channelId);
-    // console.log(this.chooseId)
   },
   methods: {
     switchTo(id) {

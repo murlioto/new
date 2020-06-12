@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import './assets/style/resetCss.css'
+import router from './routes'
 // import { getNews } from './services/newsServices'
 
 
@@ -24,4 +25,5 @@ Vue.config.productionTip = false
 
 new Vue({
   render: h => h(App),
+  router
 }).$mount('#app')
