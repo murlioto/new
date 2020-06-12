@@ -17,13 +17,17 @@ export default {
   data() {
     return {
       channelName: '',
-      page: 1,
       total: 0,
       limit: 10,
       panelNumber: 10,
       news: [],
       isLoading: true
     };
+  },
+  computed: {
+    page() {
+      return +this.$route.query.page || 1;
+    }
   },
   components: {
     Pager,
@@ -59,7 +63,15 @@ export default {
     },
     // 处理分页返回的数据
     handleChange(newPage) {
-      this.page = newPage;
+      this.$router.push({
+        name: "channel",
+        params: {
+          id: this.$route.params.id
+        },
+        query: {
+          page: newPage
+        }
+      })
       this.setChannelList();
     }
   }
