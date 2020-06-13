@@ -3,7 +3,7 @@
     <div class="header-container">
       <div class="navbar">
         <router-link :to="{ name: 'home' }">首页</router-link>
-        <router-link v-for="item in channels" :key="item.channelId" :to="{ name: 'channel', params: { id: item.channelId } }">{{item.name}}</router-link>
+        <router-link v-for="item in data.slice(0,5)" :key="item.channelId" :to="{ name: 'channel', params: { id: item.channelId } }">{{item.name}}</router-link>
       </div>
       <div class="user">
         <router-link :to="{ name: 'login' }" class="login">登录</router-link>
@@ -14,18 +14,11 @@
 </template>
 
 <script>
-import {getNewsChannels} from '../services/newsServices.js'
+import {mapState} from 'vuex'
 export default {
   name: 'Header',
-  data() {
-    return {
-      channels: []
-    }
-  },
-  async created() {
-    let resp = await getNewsChannels()
-    let handleResp = resp.channelList.slice(0,4)
-    this.channels = handleResp
+  computed: {
+    ...mapState("channels",["data","isLoading"])
   }
 };
 </script>

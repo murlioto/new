@@ -19,7 +19,7 @@
             mySwiper,
             myChannels,
             myNewsList,
-            myLoading,
+            myLoading
         },
         data () {
             return {

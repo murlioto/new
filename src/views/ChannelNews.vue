@@ -10,13 +10,12 @@
 <script>
 import Pager from '../components/Pager.vue';
 import NewsList from '../components/news/NewsList.vue';
-import { getNewsChannels, getNews } from '../services/newsServices.js';
+import { getNews } from '../services/newsServices.js';
 import Loading from '../components/Loading.vue'
 export default {
   name: 'ChannelNews',
   data() {
     return {
-      channelName: '',
       total: 0,
       limit: 10,
       panelNumber: 10,
@@ -24,9 +23,22 @@ export default {
       isLoading: true
     };
   },
+  created() {
+    console.log(this.$store.state.channels.data)
+  },
   computed: {
     page() {
       return +this.$route.query.page || 1;
+    },
+    // 获取频道名称
+    channelName() {
+      let channels = this.$store.state.channels.data
+      if(channels.length > 0) {
+        let channnel = channels.find(item => item.channelId === this.$route.params.id)
+        
+        return channnel.name
+      }
+      return ""
     }
   },
   components: {
@@ -38,21 +50,20 @@ export default {
     "$route.params.id": {
         immediate: true,
         handler() {
-          this.setChannelName()
           this.setChannelList()
         }
     }
   },
   methods: {
     // 设置频道名称
-    async setChannelName() {
-      let channels = await getNewsChannels();
-      let contentlist = channels.channelList
-      let channel = contentlist.find(item => {
-        return item.channelId === this.$route.params.id
-      })
-      this.channelName = channel.name
-    },
+    // async setChannelName() {
+    //   let channels = await getNewsChannels();
+    //   let contentlist = channels.channelList
+    //   let channel = contentlist.find(item => {
+    //     return item.channelId === this.$route.params.id
+    //   })
+    //   this.channelName = channel.name
+    // },
     // 设置新闻相关数据
     async setChannelList() {
       this.isLoading = true
