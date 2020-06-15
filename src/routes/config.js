@@ -24,6 +24,19 @@ export default {
     {
       path: '*',
       component: () => import('@/views/NotFound')
+    },
+    {
+      path: '/personal',
+      name: 'personal',
+      component: () => import('@/views/Personal'),
+      meta: {
+        auth: true,
+      }
+    },
+    {
+      path: '/auth',
+      name: 'auth',
+      component: () => import('@/views/Auth')
     }
   ]
 }

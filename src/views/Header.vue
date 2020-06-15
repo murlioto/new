@@ -6,8 +6,17 @@
         <router-link v-for="item in data.slice(0,5)" :key="item.channelId" :to="{ name: 'channel', params: { id: item.channelId } }">{{item.name}}</router-link>
       </div>
       <div class="user">
-        <router-link :to="{ name: 'login' }" class="login">登录</router-link>
-        <router-link :to="{ name: 'reg' }" class="registered">注册</router-link>
+        <!-- 情况一: 正在远程加载中 -->
+        <span v-if="isLoginIng">Loading...</span>
+        <!-- 情况二: 当前有登录用户-->
+        <template v-else-if="loginUser">
+          <router-link :to="{ name:'personal' }">用户名:{{loginUser.nickname}}</router-link>
+          <a href="#" @click.prevent="handleLoginOut">退出登录</a>
+        </template>
+        <template v-else>
+          <router-link :to="{ name: 'login' }" class="login">登录</router-link>
+          <router-link :to="{ name: 'reg' }" class="registered">注册</router-link>
+        </template>
       </div>
     </div>
   </div>
@@ -18,7 +27,17 @@ import {mapState} from 'vuex'
 export default {
   name: 'Header',
   computed: {
-    ...mapState("channels",["data","isLoading"])
+    ...mapState("channels",["data","isLoading"]),
+    ...mapState("loginUser", {
+      loginUser: "data",
+      isLoginIng: "isLoading"
+    })
+  },
+  methods: {
+    handleLoginOut() {
+      this.$store.dispatch("loginUser/loginOut")
+      this.$router.push({name: 'login'})
+    }
   }
 };
 </script>
@@ -55,7 +74,10 @@ export default {
 .header .header-container .navbar a.router-link-exact-active {
   color: orange;
 }
-.header .header-container .user .registered {
+.header .header-container .user a {
   margin-left: 10px;
+}
+.header .header-container .user span {
+  color: #fff;
 }
 </style>
