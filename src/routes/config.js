@@ -4,7 +4,10 @@ export default {
     {
       path: '/',
       name: 'home',
-      component: () => import('@/views/Home')
+      component: () => import('@/views/Home'),
+      meta: {
+        auth: true,
+      }
     },
     {
       path: '/login',
@@ -14,12 +17,15 @@ export default {
     {
       path: '/reg',
       name: 'reg',
-      component: () => import('@/views/Reg')
+      component: () => import('@/views/Reg'),
     },
     {
       path: '/channel/:id',
       name: 'channel',
-      component: () => import('@/views/ChannelNews')
+      component: () => import('@/views/ChannelNews'),
+      meta: {
+        auth: true,
+      }
     },
     {
       path: '*',
