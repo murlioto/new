@@ -8,6 +8,7 @@ Vue.config.productionTip = false
 
 // 频道数据一开始就要触发
 store.dispatch("channels/fetchDatas")
+
 store.dispatch('loginUser/whoAmI')
 
 new Vue({
